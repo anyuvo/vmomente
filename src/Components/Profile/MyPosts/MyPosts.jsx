@@ -1,16 +1,18 @@
 import React from 'react';
 import cl from "./MyPosts.module.css";
+import Post from "./Post/Post";
 
 const MyPosts = () => {
     return (
-        <div className={cl.content}>
+        <div>
+            My posts
             <div>
-                My posts
-                <div>
-                    New post
-                </div>
-                <div className={cl.item}>post 1</div>
-                <div className={cl.item}>post 2</div>
+                <textarea></textarea>
+                <button>Add post</button>
+            </div >
+            <div className={cl.posts}>
+                <Post message='Hi, how are you?'/>
+                <Post message='I am fine'/>
             </div>
         </div>
     );

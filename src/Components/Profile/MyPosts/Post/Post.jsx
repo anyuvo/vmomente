@@ -1,19 +1,12 @@
 import React from 'react';
-import cl from "./MyPosts.module.css";
+import cl from "./Post.module.css";
 
-const MyPosts = () => {
+const Post = (props) => {
     return (
-        <div className={cl.content}>
-            <div>
-                My posts
-                <div>
-                    New post
-                </div>
-                <div className={cl.item}>post 1</div>
-                <div className={cl.item}>post 2</div>
-            </div>
+        <div className={cl.item}>
+            {props.message}
         </div>
     );
 };
 
-export default MyPosts;
+export default Post;
