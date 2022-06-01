@@ -1,3 +1,7 @@
+let rerenderEntireTree = () => {
+    console.log('state changed');
+}
+
 let state = {
     profilePage: {
         postsData: [
@@ -20,13 +24,18 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) => {
+export const addPost = (postMessage) => {
     let newPost = {
         id: 3,
         message: postMessage,
         likesCount: 0
     }
     state.profilePage.postsData.push(newPost);
+    rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
 }
 
 export default state;
