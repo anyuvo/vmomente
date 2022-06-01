@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import state, {subscribe} from "./Redux/state";
-import {addPost} from "./Redux/state";
+import state, {subscribe, addPost, updateNewPostText} from "./Redux/state";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -11,6 +10,7 @@ let rerenderEntireTree = () => {
         <App
             state={state}
             addPost={addPost}
+            updateNewPostText={updateNewPostText}
         />
     );
 }
