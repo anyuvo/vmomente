@@ -7,12 +7,10 @@
     padding: 10px;
 }
 
-
+.messagesBlock {
+    padding-bottom: 10px;
+}
 
 .messages {
     padding: 10px;
-}
-
-.message {
-
 }
