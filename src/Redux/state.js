@@ -18,10 +18,11 @@ let state = {
             {name: "Irina", id: 3}
         ],
         messagesData: [
-            {message: "hi", id: 1},
-            {message: "how are you", id: 2},
-            {message: "ok ok", id: 3}
-        ]
+            {id: 1, message: "hi"},
+            {id: 2, message: "how are you"},
+            {id: 3, message: "ok ok"}
+        ],
+        newMessageText: 'NEW MESSAGE'
     }
 }
 
@@ -38,6 +39,21 @@ export const addPost = () => {
 
 export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export const addMessage = () => {
+    let newMessage = {
+        id: 4,
+        message: state.messagesPage.newMessageText
+    }
+    state.messagesPage.messagesData.push(newMessage);
+    state.messagesPage.newMessageText = '';
+    rerenderEntireTree(state);
+}
+
+export const updateNewMessageText = (newText) => {
+    state.messagesPage.newMessageText = newText;
     rerenderEntireTree(state);
 }
 
