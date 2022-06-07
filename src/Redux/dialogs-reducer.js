@@ -12,7 +12,7 @@ let initialState = {
         {id: 2, message: "how are you"},
         {id: 3, message: "ok ok"}
     ],
-    newMessageText: 'NEW MESSAGE'
+    newMessageText: ''
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -34,13 +34,13 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageActionCreator = () => {
+export const sendMessageCreator = () => {
     return {
         type: ADD_MESSAGE
     }
 }
 
-export const updateNewMessageTextActionCreator = (text) => {
+export const updateNewMessageBodyCreator = (text) => {
     return {
         type: UPDATE_NEW_MESSAGE_TEXT,
         newText: text
