@@ -18,6 +18,9 @@ const Navbar = () => {
                 <a href='#'>Music</a>
             </div>
             <div className={cl.item}>
+                <NavLink to='/users' className={l => l.isActive ? cl.activeLink : cl.item}>Find Users</NavLink>
+            </div>
+            <div className={cl.item}>
                 <a href='#'>Settings</a>
             </div>
         </nav>
