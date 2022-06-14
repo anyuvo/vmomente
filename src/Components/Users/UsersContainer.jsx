@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {
     follow,
     setCurrentPage,
-    setUsersTotalCount,
+    setTotalUsersCount,
     setUsers,
     unfollow,
     toggleIsFetching
@@ -21,7 +21,7 @@ class UsersContainer extends React.Component {
                 .then(response => {
                     this.props.toggleIsFetching(false);
                     this.props.setUsers(response.data.items);
-                    this.props.setUsersTotalCount(response.data.totalCount);
+                    this.props.setTotalUsersCount(response.data.totalCount);
                 });
         }
     }
@@ -65,6 +65,6 @@ export default connect(mapStateToProps, {
     unfollow,
     setUsers,
     setCurrentPage,
-    setUsersTotalCount,
+    setTotalUsersCount,
     toggleIsFetching
 })(UsersContainer);
