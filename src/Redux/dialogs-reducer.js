@@ -11,8 +11,7 @@ let initialState = {
         {id: 1, message: "hi"},
         {id: 2, message: "how are you"},
         {id: 3, message: "ok ok"}
-    ],
-    newMessageText: ''
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -21,11 +20,10 @@ const dialogsReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             let newMessage = {
                 id: 4,
-                message: state.newMessageText
+                message: action.newMessageText
             }
             return {
                 ...state,
-                newMessageText: '',
                 messagesData: [...state.messagesData, newMessage]
             };
         case UPDATE_NEW_MESSAGE_TEXT:
@@ -38,9 +36,10 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageCreator = () => {
+export const sendMessageCreator = (newMessageBody) => {
     return {
-        type: ADD_MESSAGE
+        type: ADD_MESSAGE,
+        newMessageBody
     }
 }
 
