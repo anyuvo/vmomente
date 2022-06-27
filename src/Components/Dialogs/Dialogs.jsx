@@ -10,17 +10,8 @@ const Dialogs = (props) => {
 
     let state = props.dialogsPage;
 
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    }
-
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    }
-
     let addNewMessage = (values) => {
-        props.sendMessage(newMessageBody);
+        props.sendMessage(values.newMessageBody);
     }
 
     let DialogsElements = state.dialogsData.map((element, i) => <DialogItem key={element.id}
@@ -31,7 +22,7 @@ const Dialogs = (props) => {
                                                                            message={element.message}
                                                                            id={element.id}/>)
 
-    let newMessageBody = state.newMessageText;
+    let newMessageBody = state.newMessageBody;
 
     if (!props.isAuth) return <Navigate to={"/login"}/>;
 
@@ -60,7 +51,7 @@ const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={"textarea"} name={newMessageBody} placeholder={"Enter your message"}/>
+                <Field component="textarea" name="newMessageBody" placeholder="Enter your message"/>
             </div>
             <div>
                 <button>Send</button>
