@@ -47,9 +47,10 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {connect} from "react-redux";
 import {login} from "../../Redux/auth-reducer";
+import {Navigate} from "react-router-dom";
+import {mapStateToPropsFactory} from "react-redux/es/connect/mapStateToProps";
 
 const LoginForm = (props) => {
-    // debugger;
 
     return (
         <Formik
@@ -117,8 +118,9 @@ const validationSchemaLoginForm = Yup.object().shape({
         .required("enter your password")
 });
 
-
 const Login = (props) => {
+    if(props.isAuth) return <Navigate to={"/profile"} />
+
     return (
         <div>
             <h1>LOGIN</h1>
@@ -127,4 +129,8 @@ const Login = (props) => {
     )
 }
 
-export default connect(null, {login})(Login);
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login);
