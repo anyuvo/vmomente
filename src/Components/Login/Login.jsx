@@ -45,6 +45,8 @@
 import React from 'react';
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
+import {connect} from "react-redux";
+import {login} from "../../Redux/auth-reducer";
 
 
 const validateLoginForm = values => {
@@ -68,7 +70,7 @@ const validationSchemaLoginForm = Yup.object().shape({
 });
 
 
-const Login = () => {
+const Login = (props) => {
 
     return (
         <div>
@@ -83,7 +85,7 @@ const Login = () => {
                 validate={validateLoginForm}
                 validationSchema={validationSchemaLoginForm}
                 onSubmit={(values) => {
-                    console.log(values)
+                    props.login(values.email, values.password, values.rememberMe);
                 }}
             >
                 {() => (
@@ -120,4 +122,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default connect(null, {login})(Login);
