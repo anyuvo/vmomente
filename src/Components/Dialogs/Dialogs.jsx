@@ -3,18 +3,11 @@ import cl from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Navigate} from 'react-router-dom';
-// import {reduxForm, Field} from 'redux-form';
-// import {Textarea} from "../common/FormsControls/FormsControls";
-// import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Formik, Form, Field} from "formik";
 
 const Dialogs = (props) => {
 
     let state = props.dialogsPage;
-
-    let addNewMessage = (values) => {
-        props.sendMessage(values.newMessageBody);
-    }
 
     let DialogsElements = state.dialogsData.map((element, i) => <DialogItem key={element.id}
                                                                             name={element.name}
@@ -23,8 +16,6 @@ const Dialogs = (props) => {
     let MessagesElements = state.messagesData.map((element, i) => <Message key={element.id}
                                                                            message={element.message}
                                                                            id={element.id}/>)
-
-    // let newMessageBody = state.newMessageBody;
 
     if (!props.isAuth) return <Navigate to={"/login"}/>;
 
@@ -82,24 +73,4 @@ const AddMassageForm = (props) => {
     )
 }
 
-//
-// let maxLength100 = maxLengthCreator(100);
-//
-// const AddMessageForm = (props) => {
-//     return (
-//         <form onSubmit={props.handleSubmit}>
-//             <div>
-//                 <Field component={Textarea}
-//                        validate={[required, maxLength100]}
-//                        name="newMessageBody" placeholder="Enter your message"/>
-//             </div>
-//             <div>
-//                 <button>Send</button>
-//             </div>
-//         </form>
-//     )
-// }
-//
-// const AddMessageFormRedux = reduxForm({form: "DialogAddMessageForm"})(AddMessageForm);
-//
 export default Dialogs;
