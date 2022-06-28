@@ -7,7 +7,8 @@ import * as Yup from "yup";
 const validationSchemaLoginForm = Yup.object().shape({
 
     newPostText: Yup.string()
-        .min(2, "Must be longer than 2 characters")
+        .max(50, "Must be longer than 50 characters")
+        .required("")
 });
 
 const MyPosts = (props) => {
