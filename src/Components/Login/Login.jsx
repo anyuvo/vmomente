@@ -48,6 +48,54 @@ import * as Yup from "yup";
 import {connect} from "react-redux";
 import {login} from "../../Redux/auth-reducer";
 
+const LoginForm = (props) => {
+    // debugger;
+
+    return (
+        <Formik
+            initialValues={{
+                email: "",
+                password: "",
+                rememberMe: false
+            }}
+            validate={validateLoginForm}
+            validationSchema={validationSchemaLoginForm}
+            onSubmit={(values) => {
+                props.login(values.email, values.password, values.rememberMe);
+            }}
+        >
+            {() => (
+                <Form>
+                    <div>
+                        <Field
+                            name={'email'}
+                            type={'text'}
+                            placeholder={'e-mail'}/>
+                    </div>
+                    <ErrorMessage name="email" component="div"/>
+
+                    <div>
+                        <Field
+                            name={'password'}
+                            type={'password'}
+                            placeholder={'password'}/>
+                    </div>
+                    <ErrorMessage name="password" component="div"/>
+
+                    <div>
+                        <Field
+                            type={'checkbox'}
+                            name={'rememberMe'}
+                            id='rememberMe'/>
+                        <label htmlFor={'rememberMe'}> remember me </label>
+                    </div>
+
+                    <button type={'submit'}>Login</button>
+                </Form>
+            )}
+        </Formik>
+    )
+};
 
 const validateLoginForm = values => {
     const errors = {};
@@ -71,53 +119,10 @@ const validationSchemaLoginForm = Yup.object().shape({
 
 
 const Login = (props) => {
-
     return (
         <div>
             <h1>LOGIN</h1>
-
-            <Formik
-                initialValues={{
-                    email: "",
-                    password: "",
-                    rememberMe: false
-                }}
-                validate={validateLoginForm}
-                validationSchema={validationSchemaLoginForm}
-                onSubmit={(values) => {
-                    props.login(values.email, values.password, values.rememberMe);
-                }}
-            >
-                {() => (
-                    <Form>
-                        <div>
-                            <Field
-                                name={'email'}
-                                type={'text'}
-                                placeholder={'e-mail'}/>
-                        </div>
-                        <ErrorMessage name="email" component="div"/>
-
-                        <div>
-                            <Field
-                                name={'password'}
-                                type={'password'}
-                                placeholder={'password'}/>
-                        </div>
-                        <ErrorMessage name="password" component="div"/>
-
-                        <div>
-                            <Field
-                                type={'checkbox'}
-                                name={'rememberMe'}
-                                id='rememberMe'/>
-                            <label htmlFor={'rememberMe'}> remember me </label>
-                        </div>
-
-                        <button type={'submit'}>Login</button>
-                    </Form>
-                )}
-            </Formik>
+            <LoginForm login={props.login}/>
         </div>
     )
 }
