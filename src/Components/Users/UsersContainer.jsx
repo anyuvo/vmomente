@@ -4,7 +4,7 @@ import {
     follow,
     setCurrentPage,
     unfollow,
-    getUsers
+    requestUsers
 } from "../../Redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -17,8 +17,6 @@ class UsersContainer extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -53,6 +51,6 @@ export default compose (
             follow,
             unfollow,
             setCurrentPage,
-            getUsers})
+            getUsers: requestUsers})
 )
 (UsersContainer);
