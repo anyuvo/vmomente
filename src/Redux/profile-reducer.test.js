@@ -41,5 +41,5 @@ it('after deleting length of post should be decremented', () => {
     let newState = profileReducer(state, action);
 
     //3. expectation
-    // expect(newState.postsData.length).toBe(1);
+    expect(newState.postsData.length).toBe(1);
 });
