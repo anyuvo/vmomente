@@ -1,0 +1,16 @@
+.breadCrumb{
+    font-size: 30px;
+    color: white;
+}
+
+.selectedPage{
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.unselectedPage{
+    cursor: pointer;
+    margin: 4px;
+}
