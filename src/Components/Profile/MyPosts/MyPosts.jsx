@@ -11,7 +11,7 @@ const validationSchemaLoginForm = Yup.object().shape({
         .required("")
 });
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
 
     let postsElements = props.posts.map((element, i) => <Post message={element.message} key={element.id}
                                                               likesCount={element.likesCount}/>)
@@ -25,7 +25,7 @@ const MyPosts = (props) => {
             </div>
         </div>
     );
-};
+});
 
 const AddNewPostForm = (props) => {
 
