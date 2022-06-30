@@ -31,3 +31,15 @@ it('message of new post should be correct', () => {
     //3. expectation
     expect(newState.postsData[2].message).toBe("HELLO");
 });
+
+it('after deleting length of post should be decremented', () => {
+
+    //1. test data
+    let action = deletePost(1);
+
+    //2. action
+    let newState = profileReducer(state, action);
+
+    //3. expectation
+    expect(newState.postsData.length).toBe(1);
+});
