@@ -28,6 +28,11 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: '',
                 postsData: [...state.postsData, newPost]
             };
+        case DELETE_POST:
+            return {
+                ...state,
+                postsData: state.postsData.filter(p => p.id != action.postId)
+            };
         case SET_USER_PROFILE:
             return {
                 ...state,
