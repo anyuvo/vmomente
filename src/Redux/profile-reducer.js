@@ -3,6 +3,7 @@ import {profileAPI} from "../api/profileAPI";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
     postsData: [
@@ -46,6 +47,13 @@ export const addPostActionCreator = (newPostText) => {
     return {
         type: ADD_POST,
         newPostText
+    }
+}
+
+export const deletePost = (postId) => {
+    return {
+        type: DELETE_POST,
+        postId
     }
 }
 
