@@ -66,7 +66,6 @@ export const addPostActionCreator = (newPostText: string): AddPostActionCreatorT
 type DeletePostActionType = {
     type: typeof DELETE_POST,
     postId: number
-
 }
 export const deletePost = (postId: number): DeletePostActionType => {
     return {
