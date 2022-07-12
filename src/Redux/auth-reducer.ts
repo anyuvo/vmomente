@@ -2,19 +2,15 @@ import {authAPI} from "../api/authAPI";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
-export type InitialStateType = {
-    userId: number | null,
-    email: string | null,
-    login: string | null,
-    isAuth: boolean
-}
-
-let initialState: InitialStateType = {
-    userId: null,
-    email: null,
-    login: null,
+let initialState = {
+    userId: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false
 }
+
+export type InitialStateType = typeof initialState;
+
 
 const authReducer = (state = initialState, action: any): InitialStateType => {
 
