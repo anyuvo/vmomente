@@ -8,13 +8,18 @@ let instance = axios.create({
     }
 });
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1
+}
+
 type MeResponseType = {
     data: {
         id: number,
         email: string,
         login: string
     },
-    resultCode: number,
+    resultCode: ResultCodesEnum,
     messages: Array<string>
 }
 

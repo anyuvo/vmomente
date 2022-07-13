@@ -1,4 +1,4 @@
-import {authAPI} from "../api/authAPI";
+import {authAPI, ResultCodesEnum} from "../api/authAPI";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -44,7 +44,7 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 export const getAuthUserData = () => async (dispatch: any) => {
 
     let meData = await authAPI.me()
-    if (meData.resultCode === 0) {
+    if (meData.resultCode === ResultCodesEnum.Success) {
         let {id, email, login} = meData.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
@@ -54,7 +54,7 @@ export const getAuthUserData = () => async (dispatch: any) => {
 export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
 
     let response = await authAPI.login(email, password, rememberMe)
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData());
     }
 }
@@ -62,7 +62,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => a
 export const logout = () => async (dispatch: any) => {
 
     let response = await authAPI.logout()
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserData(null, null, null, false));
     }
 }
