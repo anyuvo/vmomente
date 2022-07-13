@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from "react-redux";
 import {
     follow,
-    setCurrentPage,
     unfollow,
     requestUsers
 } from "../../Redux/users-reducer";
@@ -20,17 +19,26 @@ import {
 import {UserType} from "../../types/types";
 import {AppStateType} from "../../Redux/redux-store";
 
-type PropsType = {
+type MapStatePropsType = {
     totalUsersCount: number,
     pageSize: number,
     currentPage: number,
     users: Array<UserType>,
     followingInProgress: Array<number>,
     isFetching: boolean,
-    unfollow: () => void,
-    follow: () => void,
+}
+
+type MapDispatchPropsType = {
+    unfollow: (userId: number) => void,
+    follow: (userId: number) => void,
     getUsers: (currentPage: number, pageSize: number) => void
 }
+
+type OwnPropsType = {
+    pageTitle: string
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 class UsersContainer extends React.Component<PropsType> {
 
@@ -45,6 +53,7 @@ class UsersContainer extends React.Component<PropsType> {
 
     render() {
         return <>
+            <h2>{this.props.pageTitle}</h2>
             {this.props.isFetching ? <Preloader/> : <Users totalUsersCount={this.props.totalUsersCount}
                                                            pageSize={this.props.pageSize}
                                                            currentPage={this.props.currentPage}
@@ -57,7 +66,7 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -69,11 +78,12 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose<React.Component> (
-    connect(mapStateToProps, {
-            follow,
-            unfollow,
-            setCurrentPage,
-            getUsers: requestUsers})
+export default compose<React.Component>(
+    //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+        follow,
+        unfollow,
+        getUsers: requestUsers
+    })
 )
 (UsersContainer);

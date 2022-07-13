@@ -39,7 +39,7 @@ class App extends React.Component {
                             <Route path='/dialogs/*'
                                    element={<DialogsContainer/>}/>
                             <Route path='/users/*'
-                                   element={<UsersContainer/>}/>
+                                   element={<UsersContainer pageTitle={"SAMURAIS"}/>}/>
                             <Route path='/login'
                                    element={<LoginPage/>}/>
                         </Routes>
