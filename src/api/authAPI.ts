@@ -23,13 +23,22 @@ type MeResponseType = {
     messages: Array<string>
 }
 
+type LoginResponseType = {
+    data: {
+        userId: number
+    },
+    resultCode: ResultCodesEnum,
+    messages: Array<string>
+}
+
 export const authAPI = {
     me() {
         return instance.get<MeResponseType>(`auth/me`)
             .then(response => response.data);
     },
     login(email: string, password: string, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe});
+        return instance.post<LoginResponseType>(`auth/login`, {email, password, rememberMe})
+            .then(response => response.data);
     },
     logout() {
         return instance.delete(`auth/login`);
