@@ -2,6 +2,7 @@ import {usersAPI} from "../api/usersAPI";
 import {UserType} from "../types/types";
 import {AppStateType} from "./redux-store";
 import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 
 //CONST of Actions
 
@@ -124,18 +125,20 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
 
 //Thunks
 
-type GetStateType = () => AppStateType;
-type DispatchType = Dispatch<ActionsTypes>;
+// type GetStateType = () => AppStateType;
+// type DispatchType = Dispatch<ActionsTypes>;
 
-export const requestUsers = (page: number, pageSize: number) => async (dispatch: DispatchType, getState: GetStateType) => {
+export const requestUsers = (page: number, pageSize: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
+    return async (dispatch, getState) => {
 
-    dispatch(toggleIsFetching(true));
-    dispatch(setCurrentPage(page));
+        dispatch(toggleIsFetching(true));
+        dispatch(setCurrentPage(page));
 
-    let data = await usersAPI.getUsers(page, pageSize)
-    dispatch(toggleIsFetching(false));
-    dispatch(setUsers(data.items));
-    dispatch(setTotalUsersCount(data.totalCount));
+        let data = await usersAPI.getUsers(page, pageSize)
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+    }
 }
 
 export const follow = (userId: number) => async (dispatch: any) => {
