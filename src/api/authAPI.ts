@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import axios from "axios";
 
 let instance = axios.create({
     withCredentials: true,
@@ -8,11 +8,21 @@ let instance = axios.create({
     }
 });
 
+type MeResponseType = {
+    data: {
+        id: number,
+        email: string,
+        login: string
+    },
+    resultCode: number,
+    messages: Array<string>
+}
+
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`);
+        return instance.get<MeResponseType>(`auth/me`);
     },
-    login(email, password, rememberMe = false) {
+    login(email: string, password: string, rememberMe = false) {
         return instance.post(`auth/login`, {email, password, rememberMe});
     },
     logout() {

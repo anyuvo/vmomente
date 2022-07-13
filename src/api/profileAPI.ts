@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import axios from "axios";
 
 let instance = axios.create({
     withCredentials: true,
@@ -9,13 +9,13 @@ let instance = axios.create({
 });
 
 export const profileAPI = {
-    getProfile(userId) {
+    getProfile(userId: number) {
         return instance.get(`profile/${userId}`)
     },
-    getStatus(userId) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status})
     },
 }
