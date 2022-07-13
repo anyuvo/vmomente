@@ -20,7 +20,8 @@ type MeResponseType = {
 
 export const authAPI = {
     me() {
-        return instance.get<MeResponseType>(`auth/me`);
+        return instance.get<MeResponseType>(`auth/me`)
+            .then(response => response.data);
     },
     login(email: string, password: string, rememberMe = false) {
         return instance.post(`auth/login`, {email, password, rememberMe});
