@@ -127,8 +127,9 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): To
 
 // type GetStateType = () => AppStateType;
 // type DispatchType = Dispatch<ActionsTypes>;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
-export const requestUsers = (page: number, pageSize: number): ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes> => {
+export const requestUsers = (page: number, pageSize: number): ThunkType => {
     return async (dispatch, getState) => {
 
         dispatch(toggleIsFetching(true));
@@ -141,7 +142,7 @@ export const requestUsers = (page: number, pageSize: number): ThunkAction<Promis
     }
 }
 
-export const follow = (userId: number) => async (dispatch: any) => {
+export const follow = (userId: number): ThunkType => async (dispatch) => {
 
     dispatch(toggleFollowingProgress(true, userId));
     let data = await usersAPI.follow(userId)
@@ -151,7 +152,7 @@ export const follow = (userId: number) => async (dispatch: any) => {
     dispatch(toggleFollowingProgress(false, userId));
 }
 
-export const unfollow = (userId: number) => async (dispatch: any) => {
+export const unfollow = (userId: number): ThunkType => async (dispatch) => {
 
     dispatch(toggleFollowingProgress(true, userId));
     let data = await usersAPI.unfollow(userId)
